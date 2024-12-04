@@ -9,10 +9,12 @@ problems, implemented in Tcl.
  <br/>
  Adoration of the Magi by Antonio Allegri da Correggio 1489 - 1534
 </p>
+
 Full List:
 
 - Day 1: Historian Hysteria: [01.tcl](./01.tcl), [enunciation](https://adventofcode.com/2024/day/1). 
 - Day 2: Red-Nosed Reports: [02.tcl](./02.tcl), [enunciation](https://adventofcode.com/2024/day/2).
 - Day 3: Mull It Over: [03.tcl](./03.tcl), [enunciation](https://adventofcode.com/2024/day/3).
+- Day 4: Ceres Search: [04.tcl](./04.tcl), [enunciation](https://adventofcode.com/2024/day/4).
 
 Install tcl `sudo apt-get -y install tcl` and then run with `tclsh ./01.tcl`.
