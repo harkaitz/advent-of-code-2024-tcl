@@ -17,5 +17,6 @@ Full List:
 - Day 3: Mull It Over: [03.tcl](./03.tcl), [enunciation](https://adventofcode.com/2024/day/3).
 - Day 4: Ceres Search: [04.tcl](./04.tcl), [enunciation](https://adventofcode.com/2024/day/4).
 - Day 5: Print Queue: [05.tcl](./05.tcl), [enunciation](https://adventofcode.com/2024/day/5).
+- Day 6: Guard Gallivant: [06.tcl](./06.tcl), [enunciation](https://adventofcode.com/2024/day/6).
 
 Install tcl `sudo apt-get -y install tcl` and then run with `tclsh ./01.tcl`.
