@@ -1,5 +1,4 @@
 #!/usr/bin/env tclsh
-source cc.tcl
 proc aoc_02 { } {
     set d [aoc_read "02.data"]
     set count1 0
@@ -44,6 +43,7 @@ proc aoc_is_save_2 { l } {
     return 0
 }
 if {[file tail $argv0] eq [file tail [info script]]} {
+    source cc.tcl
     # Example results: 2, 4
     # My results: 242, 311
     puts [aoc_02]

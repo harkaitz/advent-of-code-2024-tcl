@@ -1,6 +1,4 @@
 #!/usr/bin/env tclsh
-source cc.tcl
-
 proc aoc_06 { } {
     global d map visited
     set res [list]
@@ -130,6 +128,7 @@ proc aoc_move_map { } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
+    source cc.tcl
     # Example results: 41, 6
     # My results: 4580, 1480
     puts [aoc_06]

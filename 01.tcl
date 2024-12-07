@@ -1,5 +1,4 @@
 #!/usr/bin/env tclsh
-source cc.tcl
 proc aoc_01 { } {
     set d [aoc_read "01.data"]
     set res {}
@@ -33,6 +32,7 @@ proc aoc_get_column { data pat var } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
+    source cc.tcl
     # Example results: 11, 31 
     # My results: 2367773, 21271939
     puts [aoc_01]

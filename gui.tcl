@@ -16,6 +16,7 @@ set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
 ## -------------------------------------------------------------------
 set dir [file dirname [info script]]
+source [file join $dir "cc.tcl"]
 foreach day $days {
     source [file join $dir "$day.tcl"]
 }

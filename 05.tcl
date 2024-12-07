@@ -1,6 +1,4 @@
 #!/usr/bin/env tclsh
-source cc.tcl
-
 proc aoc_05 { } {
     set d [aoc_read "05.data"]
     
@@ -52,6 +50,7 @@ proc lmiddle { lst } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
+    source cc.tcl
     # Example results: 143, 123
     # My results: 5329, 5833
     puts [aoc_05]

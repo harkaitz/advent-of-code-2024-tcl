@@ -1,5 +1,4 @@
 #!/usr/bin/env tclsh
-source cc.tcl
 proc aoc_04 { } {
     set res [list]
     set d1 [aoc_read "04.data" 1 "="]
@@ -92,6 +91,7 @@ proc search1 { m i j } {
 }
 
 if {[file tail $argv0] eq [file tail [info script]]} {
+    source cc.tcl
     # Example results: 18, 9
     # My results: 2560, 1910
     puts [aoc_04]
