@@ -1,6 +1,6 @@
 #!/usr/bin/env tclsh
 proc aoc_06 { } {
-    global d map visited
+    global map visited
     set res [list]
 
     set d [aoc_read "06.data"]

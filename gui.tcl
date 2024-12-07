@@ -3,7 +3,7 @@ package require Tk
 ## -------------------------------------------------------------------
 set wm_title "Advent of Code 2024 Tcl/Tk solutions"
 set title "AoC 2024 Tcl/Tk solutions"
-set days {01 02 03 04 05 06}
+set days {01 02 03 04 05 06 07}
 set menu {
     "Day 1: Historian Hysteria"
     "Day 2: Red-Nosed Reports"
@@ -11,6 +11,7 @@ set menu {
     "Day 4: Ceres Search"
     "Day 5: Print Queue"
     "Day 6: Guard Gallivant"
+    "Day 7: Bridge Repair"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
@@ -43,7 +44,7 @@ button .ops.run -text "Get answer" -command {
 ## (3.3) Example button
 button .ops.data -text "Example data" -command select_example
 ## (3.4) Result display
-label .ops.result -text "" -justify "left" -font "Helvetica 12 bold" -wraplength 500  -borderwidth 2 -relief "groove"
+label .ops.result -text "" -justify "left" -font "bold" -wraplength 500  -borderwidth 2 -relief "groove"
 ##
 pack .ops        -fill "x" -padx "10" -pady "3"
 pack .ops.days   -side left           -padx "2"
