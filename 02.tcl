@@ -1,12 +1,6 @@
 #!/usr/bin/env tclsh
 source cc.tcl
 proc aoc_02 { } {
-    #set d {7 6 4 2 1
-    #    1 2 7 8 9
-    #    9 7 6 2 1
-    #    1 3 2 4 5
-    #    8 6 4 4 1
-    #    1 3 6 7 9}
     set d [aoc_read "02.data"]
     set count1 0
     set count2 0
@@ -14,8 +8,7 @@ proc aoc_02 { } {
         incr count1 [aoc_is_save_1 $l]
         incr count2 [aoc_is_save_2 $l]
     }
-    puts $count1
-    puts $count2
+    return [list $count1 $count2]
 }
 
 proc aoc_is_save_1 { l } {
@@ -50,5 +43,8 @@ proc aoc_is_save_2 { l } {
     }
     return 0
 }
-
-aoc_02
+if {[file tail $argv0] eq [file tail [info script]]} {
+    # Example results: 2, 4
+    # My results: 242, 311
+    puts [aoc_02]
+}

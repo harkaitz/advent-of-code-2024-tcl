@@ -1,11 +1,9 @@
 #!/usr/bin/env tclsh
 source cc.tcl
 proc aoc_03 { } {
-    set d [aoc_read "03.data"]
-    #set d {xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))}
-    #set d {xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))}
-    puts [aoc_int1 $d]
-    puts [aoc_int2 $d]
+    set d1 [aoc_read "03.data" 1 =]
+    set d2 [aoc_read "03.data" 2 =]
+    return [list [aoc_int1 $d1] [aoc_int2 $d2]]
 }
 proc aoc_int2 { d } {
     set re_all {[a-z']+\([0-9,]*\)}
@@ -35,4 +33,8 @@ proc aoc_int1 { d } {
     }
     return $sum
 }
-aoc_03
+if {[file tail $argv0] eq [file tail [info script]]} {
+    # Example results: 161, 48
+    # My results: 173529487, 99532691
+    puts [aoc_03]
+}

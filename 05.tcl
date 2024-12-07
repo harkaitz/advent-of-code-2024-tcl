@@ -2,8 +2,6 @@
 source cc.tcl
 
 proc aoc_05 { } {
-    global d
-    
     set d [aoc_read "05.data"]
     
     ## Parse input updates and write comparator with the rules.
@@ -45,9 +43,7 @@ proc aoc_05 { } {
         }
     }
 
-    # Results: 5329, 5833
-    puts $count1
-    puts $count2
+    return [list $count1 $count2]
 }
 proc lmiddle { lst } {
     set l [llength $lst]
@@ -55,34 +51,8 @@ proc lmiddle { lst } {
     return [lindex $lst $m]
 }
 ## -------------------------------------------------------------------
-set d {47|53
-97|13
-97|61
-97|47
-75|29
-61|13
-75|53
-29|13
-97|29
-53|29
-61|53
-97|53
-61|29
-47|13
-75|47
-97|75
-47|61
-75|61
-47|29
-75|13
-53|13
-
-75,47,61,53,29
-97,61,53,29,13
-75,29,13
-75,97,47,61,53
-61,13,29
-97,13,75,29,47
+if {[file tail $argv0] eq [file tail [info script]]} {
+    # Example results: 143, 123
+    # My results: 5329, 5833
+    puts [aoc_05]
 }
-## -------------------------------------------------------------------
-aoc_05

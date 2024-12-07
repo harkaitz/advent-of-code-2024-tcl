@@ -1,13 +1,13 @@
 #!/usr/bin/env tclsh
 source cc.tcl
 proc aoc_01 { } {
-    # set l1 {3 4 2 1 3 3}
-    # set l2 {4 3 5 3 9 3}
-    set d [aoc_read 01.data]
+    set d [aoc_read "01.data"]
+    set res {}
     set l1 [aoc_get_column $d {a b} a]
     set l2 [aoc_get_column $d {a b} b]
-    puts [distance $l1 $l2]
-    puts [similarity $l1 $l2]
+    lappend res [distance $l1 $l2]
+    lappend res [similarity $l1 $l2]
+    return $res
 }
 proc distance { l1 l2 } {
     set t 0
@@ -24,4 +24,16 @@ proc similarity { l1 l2 } {
     }
     return $sim
 }
-aoc_01
+proc aoc_get_column { data pat var } {
+    set l [list]
+    foreach $pat $data {
+        lappend l [set $var]
+    }
+    return $l
+}
+## -------------------------------------------------------------------
+if {[file tail $argv0] eq [file tail [info script]]} {
+    # Example results: 11, 31 
+    # My results: 2367773, 21271939
+    puts [aoc_01]
+}

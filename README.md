@@ -20,3 +20,12 @@ Full List:
 - Day 6: Guard Gallivant: [06.tcl](./06.tcl), [enunciation](https://adventofcode.com/2024/day/6).
 
 Install tcl `sudo apt-get -y install tcl` and then run with `tclsh ./01.tcl`.
+
+Inputs are not provided in this repository as stated in [Advent of Code's rules](https://adventofcode.com/about).
+You must download yours from the AoC.
+
+This is Tcl/Tk, of course there's a [gui.tcl](./gui.tcl) 😉. Run it with `wish ./gui.tcl`.
+
+<p align="center">
+    <img src="screenshot.png" width="350" title="advent_gui">
+</p>

@@ -3,6 +3,7 @@ source cc.tcl
 
 proc aoc_06 { } {
     global d map visited
+    set res [list]
 
     set d [aoc_read "06.data"]
     aoc_parse_map $d
@@ -10,11 +11,9 @@ proc aoc_06 { } {
     
     ## = Part 1 =
     aoc_play
-    # 41,4580
-    puts [aoc_count_pos]
+    lappend res [aoc_count_pos]
 
     ## = Part 2 =
-    # 6,1480
     set count 0
     foreach lock [array names visited] {
         aoc_load_map
@@ -28,7 +27,8 @@ proc aoc_06 { } {
         flush stdout
     }
     puts ""
-    puts $count
+    lappend res $count
+    return $res
 }
 proc aoc_play { {i 0} } {
     while { 1 } {
@@ -129,25 +129,8 @@ proc aoc_move_map { } {
     return 0
 }
 ## -------------------------------------------------------------------
-set d "....#.....
-.........#
-..........
-..#.......
-.......#..
-..........
-.#..^.....
-........#.
-#.........
-......#..."
-set dd "....#.....
-.........#
-..........
-..#.......
-.......#..
-..........
-.#.O^.....
-........#.
-#.........
-......#..."
-## -------------------------------------------------------------------
-aoc_06
+if {[file tail $argv0] eq [file tail [info script]]} {
+    # Example results: 41, 6
+    # My results: 4580, 1480
+    puts [aoc_06]
+}
