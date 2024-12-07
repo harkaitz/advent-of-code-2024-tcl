@@ -19,13 +19,10 @@ Full List:
 - Day 5: Print Queue: [05.tcl](./05.tcl), [enunciation](https://adventofcode.com/2024/day/5).
 - Day 6: Guard Gallivant: [06.tcl](./06.tcl), [enunciation](https://adventofcode.com/2024/day/6).
 
-Install tcl `sudo apt-get -y install tcl` and then run with `tclsh ./01.tcl`.
+Install tcl `sudo apt-get -y install tcl` and then run with `tclsh ./01.tcl`. You
+can also run the [gui](./gui.tcl) with `wish ./gui.tcl` 😉.
 
-Inputs are not provided in this repository as stated in [Advent of Code's rules](https://adventofcode.com/about).
-You must download yours from the AoC.
+Gui screenshot:
 
-This is Tcl/Tk, of course there's a [gui.tcl](./gui.tcl) 😉. Run it with `wish ./gui.tcl`.
+<img src="screenshot.png" title="advent_gui">
 
-<p align="center">
-    <img src="screenshot.png" width="350" title="advent_gui">
-</p>
