@@ -32,7 +32,7 @@ proc aoc_get_column { data pat var } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 11, 31 
     # My results: 2367773, 21271939
     puts [aoc_01]

@@ -128,7 +128,7 @@ proc aoc_move_map { } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 41, 6
     # My results: 4580, 1480
     puts [aoc_06]

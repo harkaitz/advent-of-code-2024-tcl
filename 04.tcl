@@ -91,7 +91,7 @@ proc search1 { m i j } {
 }
 
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 18, 9
     # My results: 2560, 1910
     puts [aoc_04]

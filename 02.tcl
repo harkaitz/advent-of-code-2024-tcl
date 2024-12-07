@@ -43,7 +43,7 @@ proc aoc_is_save_2 { l } {
     return 0
 }
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 2, 4
     # My results: 242, 311
     puts [aoc_02]

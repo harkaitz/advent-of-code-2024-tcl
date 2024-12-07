@@ -50,7 +50,7 @@ proc lmiddle { lst } {
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 143, 123
     # My results: 5329, 5833
     puts [aoc_05]

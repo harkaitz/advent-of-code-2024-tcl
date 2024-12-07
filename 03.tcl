@@ -33,7 +33,7 @@ proc aoc_int1 { d } {
     return $sum
 }
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 161, 48
     # My results: 173529487, 99532691
     puts [aoc_03]

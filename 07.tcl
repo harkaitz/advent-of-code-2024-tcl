@@ -8,8 +8,8 @@ proc aoc_07 { } {
         set nums [lindex $res_nums 1]
         puts -nonewline "."
         flush stdout
-        incr count1 [stepf [recursive_search $res {"+" "*"} {*}$nums]]
-        incr count2 [stepf [recursive_search $res {"+" "*" "||"} {*}$nums]]
+        incr count1 [recursive_search $res {"+" "*"} {*}$nums]
+        incr count2 [recursive_search $res {"+" "*" "||"} {*}$nums]
     }
     puts ""
     return [list $count1 $count2]
@@ -30,27 +30,20 @@ proc recursive_search { num ops a b args } {
         if {[lsearch $ans_l $num] != -1} {
             return $num
         } else {
-            return -1
+            return 0
         }
     }
     foreach ans $ans_l {
         set res [recursive_search $num $ops $ans {*}$args]
-        if {$res >= 0} {
+        if {$res > 0} {
             return $res
         }
     }
-    return -1
-}
-proc stepf { n } {
-    if {$n < 0} {
-        return 0
-    } else {
-        return $n
-    }
+    return 0
 }
 ## -------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
-    source cc.tcl
+    source "rd.tcl"
     # Example results: 3749 11387
     # My results: 1620690235709 145397611075341
     puts [aoc_07]
