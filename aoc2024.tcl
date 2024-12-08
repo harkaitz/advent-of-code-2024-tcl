@@ -3,7 +3,7 @@ package require Tk
 ## -------------------------------------------------------------------
 set wm_title "Advent of Code 2024 Tcl/Tk solutions"
 set title "AoC 2024 Tcl/Tk solutions"
-set days {01 02 03 04 05 06 07}
+set days {01 02 03 04 05 06 07 08}
 set menu {
     "Day 1: Historian Hysteria"
     "Day 2: Red-Nosed Reports"
@@ -12,6 +12,7 @@ set menu {
     "Day 5: Print Queue"
     "Day 6: Guard Gallivant"
     "Day 7: Bridge Repair"
+    "Day 8: Resonant Collinearity"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"

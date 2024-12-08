@@ -19,6 +19,7 @@ Full List:
 - Day 5: Print Queue: [05.tcl](./05.tcl), [enunciation](https://adventofcode.com/2024/day/5).
 - Day 6: Guard Gallivant: [06.tcl](./06.tcl), [enunciation](https://adventofcode.com/2024/day/6).
 - Day 7: Bridge Repair: [07.tcl](./07.tcl), [enunciation](https://adventofcode.com/2024/day/7).
+- Day 8: Resonant Collinearity: [08.tcl](./08.tcl), [enunciation](https://adventofcode.com/2024/day/8).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
