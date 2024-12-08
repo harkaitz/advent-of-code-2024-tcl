@@ -17,9 +17,9 @@ set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
 ## -------------------------------------------------------------------
 set dir [file dirname [info script]]
-source [file join $dir "rd.tcl"]
+source "$dir/rd.tcl"
 foreach day $days {
-    source [file join $dir "$day.tcl"]
+    source "$dir/$day.tcl"
 }
 ## Main window
 wm title . $wm_title
@@ -64,10 +64,10 @@ proc get_day { } {
     return [format "%02d" $day]
 }
 proc update_data { } {
-    global from_gui
+    global from_gui dir
     set data [string trim [.input get 1.0 end]]
     if {$data eq ""} {
-        .input insert end [aoc_read [get_day].data]
+        .input insert end [aoc_read $dir/[get_day].data]
         set data [.input get 1.0 end]
     }
     set from_gui $data

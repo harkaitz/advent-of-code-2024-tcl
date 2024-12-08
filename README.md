@@ -21,7 +21,7 @@ Full List:
 - Day 7: Bridge Repair: [07.tcl](./07.tcl), [enunciation](https://adventofcode.com/2024/day/7).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
-can also run the [gui](./gui.tcl) with `wish ./gui.tcl` 😉.
+can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
 
 ## Screenshots:
 
