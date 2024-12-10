@@ -4,24 +4,39 @@ proc aoc_09 { } {
     set r [list]
     set d [aoc_read "09.data"]
     ## Defrag 1
-    puts "Defragmenting 1"
-    lappend r FAIL
-    ## Defrag 2
-    puts "Defragmenting 2"
     parse $d
-    defrag 2
-    set ck [checksum]
-    puts $ck
-    lappend r $ck
+    defrag1
+    lappend r [checksum]
+    ## Defrag 2
+    parse $d
+    defrag2
+    lappend r [checksum]
 }
 ## -------------------------------------------------------------------
-proc defrag { phase } {
-    global blocks blocksz
+proc defrag1 { } {
+    global data space disksz
+    set fl [lsort -real [array names space]]
+    set dl [lreverse [lsort -real [array names data]]]
+    puts "Defragmenting 1"
+    foreach d $dl f $fl {
+        if {$d eq "" || $f eq "" || $d < $f} {
+            return
+        }
+        set data($f) $data($d)
+        set space($d) "."
+        unset data($d)
+    }
+}
+## -------------------------------------------------------------------
+## There must be a better way.
+proc defrag2 { } {
+    global data disksz
     set sp_pos 0
-    set da_pos [expr $blocksz - 1]
+    set da_pos [expr $disksz - 1]
+    puts "Defragmenting 2"
     while {1} {
-        set da [get_data_$phase $da_pos 0]
-        set sp [get_space_$phase $sp_pos $da_pos [len_block $da]]
+        set da [get_data_2 $da_pos 0]
+        set sp [get_space_2 $sp_pos $da_pos [len_block $da]]
         set da_pos [nxt_block $da -1]
         if {$da_pos < 0} {
             break
@@ -34,58 +49,25 @@ proc defrag { phase } {
             flush stdout
             continue
         }
-        if {$phase eq "1"} {
-            set sp_pos [nxt_block $sp 1]
-        }
         puts -nonewline "+"
         flush stdout
         move_block $sp $da
     }
     puts ""
 }
-## -------------------------------------------------------------------
-proc get_space_1 { start {pmax -1} {bmin 0}} {
-    global blocks blocksz
-    if {$pmax < 0} {
-        set pmax $blocksz
-    }
-    set l [list "."]
-    set lsz 0
-    for {set i $start} {$i < $pmax} {incr i} {
-        set c [lindex $blocks $i]
-        if {$c eq "."} {
-            lappend l $i
-            incr lsz
-            if {$lsz >= $bmin} {
-                break
-            }
-        }
-    }
-    if {$lsz} {
-        return $l
-    } else {
-        return {}
-    }
-}
-proc get_data_1 { start {pmin 0} {bmax 100000}} {
-    return [get_data_2 $start $pmin $bmax]
-}
-
-
 proc get_space_2 { start {pmax -1} {bmin 1} } {
-    global blocks blocksz
+    global data space disksz
     if {$pmax < 0} {
-        set pmax $blocksz
+        set pmax $disksz
     }
     set i $start
     while {1} {
         set b -1
         set b_l [list]
         for {} {$i < $pmax} {incr i} {
-            set c [lindex $blocks $i]
-            if {$c eq "."} {
+            if {[info exists space($i)]} {
                 if {$b eq "-1"} {
-                    set b $c
+                    set b "."
                 }
                 lappend b_l $i
             } elseif {$b ne "-1"} {
@@ -103,18 +85,18 @@ proc get_space_2 { start {pmax -1} {bmin 1} } {
         return {}
     }
 }
-proc get_data_2 { {start -1} {pmin 0} {bmax 100000} } {
-    global blocks blocksz
+proc get_data_2 { {start -1} {pmin 0} {bmax 1000000} } {
+    global data space disksz
     if {$start < 0} {
-        set start [expr $blocksz - 1]
+        set start [expr $disksz - 1]
     }
     set i $start
     while {1} {
         set b -1
         set b_l [list]
         for {} {$i >= $pmin} {incr i -1} {
-            set c [lindex $blocks $i]
-            if {$c ne "."} {
+            if {[info exists data($i)]} {
+                set c $data($i)
                 if {$b eq "-1"} {
                     set b $c
                 }
@@ -142,7 +124,7 @@ proc nxt_block { block dif } {
     expr {[lindex $block end] + $dif}
 }
 proc move_block { to fr } {
-    global blocks
+    global data space
     set to_id [lindex $to 0]
     set fr_id [lindex $fr 0]
     foreach f [lrange $fr 1 end] t [lrange $to 1 end] {
@@ -152,8 +134,10 @@ proc move_block { to fr } {
         if {$t eq ""} {
             break
         }
-        lset blocks $f "."
-        lset blocks $t $fr_id
+        set space($f) "."
+        set data($t) $fr_id
+        unset data($f)
+        unset space($t)
     }
     return [expr [lindex $to end] + 1]
 }
@@ -161,39 +145,51 @@ proc len_block { block } {
     return [llength [lrange $block 1 end]]
 }
 ## -------------------------------------------------------------------
-proc parse { d } {
-    global blocks blocksz
-    set is_data 1
+proc parse { dd } {
+    global data space disksz
+    unset -nocomplain data space disksz
     set id 0
-    set blocks [list]
-    foreach c [split $d ""] {
-        if {$is_data} {
-            set b $id
-            incr id
-            set is_data 0
-        } else {
-            set b "."
-            set is_data 1
+    set disksz 0
+    foreach {d f} [split $dd ""] {
+        for {set i 0} {$i < $d} {incr i} {
+            set data($disksz) $id
+            incr disksz
         }
-        for {set i 0} {$i < $c} {incr i} {
-            lappend blocks $b
+        if {$f ne ""} {
+            for {set i 0} {$i < $f} {incr i} {
+                set space($disksz) "."
+                incr disksz
+            }
         }
+        incr id
     }
-    set blocksz [llength $blocks]
+}
+proc get_blocks { } {
+    global disksz
+    set l {}
+    for {set i 0} {$i < $disksz} {incr i} {
+        lappend l $i
+    }
+    return $l
 }
 proc print { } {
-    global blocks
-    puts [join $blocks ""]
+    global data
+    foreach p [get_blocks] {
+        if {[info exists data($p)]} {
+            puts -nonewline $data($p)
+        } else {
+            puts -nonewline "."
+        }
+    }
+    puts ""
 }
 proc checksum { } {
-    global blocks
-    set i 0
+    global data
     set s 0
-    foreach e $blocks {
-        if {$e ne "."} {
-            incr s [expr $e * $i]
+    foreach p [get_blocks] {
+        if {[info exists data($p)]} {
+            incr s [expr $data($p) * $p]
         }
-        incr i
     }
     return $s
 }
