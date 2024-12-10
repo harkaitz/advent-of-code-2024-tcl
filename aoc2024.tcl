@@ -3,7 +3,6 @@ package require Tk
 ## -------------------------------------------------------------------
 set wm_title "Advent of Code 2024 Tcl/Tk solutions"
 set title "AoC 2024 Tcl/Tk solutions"
-set days {01 02 03 04 05 06 07 08}
 set menu {
     "Day 1: Historian Hysteria"
     "Day 2: Red-Nosed Reports"
@@ -13,15 +12,13 @@ set menu {
     "Day 6: Guard Gallivant"
     "Day 7: Bridge Repair"
     "Day 8: Resonant Collinearity"
+    "Day 9: Disk Fragmenter"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
 ## -------------------------------------------------------------------
 set dir [file dirname [info script]]
 source "$dir/rd.tcl"
-foreach day $days {
-    source "$dir/$day.tcl"
-}
 ## Main window
 wm title . $wm_title
 wm geometry . "600x460"
@@ -38,9 +35,11 @@ ttk::combobox .ops.days -state readonly -values $menu -postcommand select_exampl
 bind .ops.days <<ComboboxSelected>> select_example
 ## (3.2) Run button
 button .ops.run -text "Get answer" -command {
+    set day [get_day]
     update_data
+    source "$dir/$day.tcl"
     .ops.result configure -text Thinking...
-    .ops.result configure -text [aoc_[get_day]]
+    .ops.result configure -text [aoc_$day]
 }
 ## (3.3) Example button
 button .ops.data -text "Example data" -command select_example
