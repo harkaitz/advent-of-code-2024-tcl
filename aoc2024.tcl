@@ -14,6 +14,7 @@ set menu {
     "Day 8: Resonant Collinearity"
     "Day 9: Disk Fragmenter"
     "Day 10: Hoof It"
+    "Day 11: Plutonian Pebbles"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
