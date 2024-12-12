@@ -23,6 +23,7 @@ Full List:
 - Day 9: Disk Fragmenter: [09.tcl](./09.tcl), [enunciation](https://adventofcode.com/2024/day/9).
 - Day 10: Hoof It: [10.tcl](./10.tcl), [enunciation](https://adventofcode.com/2024/day/10).
 - Day 11: Plutonian Pebbles: [11.tcl](./11.tcl), [enunciation](https://adventofcode.com/2024/day/11).
+- Day 12: Garden Groups: [12.tcl](./12.tcl), [enunciation](https://adventofcode.com/2024/day/12).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
