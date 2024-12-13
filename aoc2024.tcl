@@ -16,6 +16,7 @@ set menu {
     "Day 10: Hoof It"
     "Day 11: Plutonian Pebbles"
     "Day 12: Garden Groups"
+    "Day 13: Claw Contraption"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
