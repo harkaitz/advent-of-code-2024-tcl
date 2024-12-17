@@ -154,7 +154,7 @@ proc map_set { p v } { global map; set map([list [y $p] [x $p]]) $v }
 # --------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
     source "rd.tcl"
-    # Example results: 7036|11048
+    # Example results: 7036 45
     # My results: 99448 498
     puts [aoc_16]
 }
