@@ -27,6 +27,7 @@ Full List:
 - Day 13: Claw Contraption: [13.tcl](./13.tcl), [enunciation](https://adventofcode.com/2024/day/13).
 - Day 14: Restroom Redoubt: [14.tcl](./14.tcl), [enunciation](https://adventofcode.com/2024/day/14).
 - Day 15: Warehouse Woes: [15.tcl](./15.tcl), [enunciation](https://adventofcode.com/2024/day/15).
+- Day 16: Reindeer Maze: [16.tcl](./16.tcl), [enunciation](https://adventofcode.com/2024/day/16).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
