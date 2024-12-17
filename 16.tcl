@@ -4,7 +4,7 @@
 #
 # 1. Positions are scored like in Dijkstra.
 # 2. A grace score of 1500 to find same score paths (part 2)
-# 3. Always turn right first (Vicky the Viking strategy)
+# 3. Always turn right first.
 proc aoc_16 { } {
     set result [list]
     set data [aoc_read "16.data"]
