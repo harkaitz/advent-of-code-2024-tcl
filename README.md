@@ -30,6 +30,7 @@ Full List:
 - Day 16: Reindeer Maze: [16.tcl](./16.tcl), [enunciation](https://adventofcode.com/2024/day/16).
 - Day 17: Chronospatial Computer: [17.tcl](./17.tcl), [enunciation](https://adventofcode.com/2024/day/17).
 - Day 18: RAM Run: [18.tcl](./18.tcl), [enunciation](https://adventofcode.com/2024/day/18).
+- Day 19: Linen Layout: [19.tcl](./19.tcl), [enunciation](https://adventofcode.com/2024/day/19).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.

@@ -22,6 +22,7 @@ set menu {
     "Day 16: Reindeer Maze"
     "Day 17: Chronospatial Computer"
     "Day 18: RAM Run"
+    "Day 19: Linen Layout"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
