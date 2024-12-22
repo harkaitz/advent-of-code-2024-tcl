@@ -24,6 +24,7 @@ set menu {
     "Day 18: RAM Run"
     "Day 19: Linen Layout"
     "Day 20: Race Condition"
+    "Day 21: Keypad Conundrum"
     "Day 22: Monkey Market"
 }
 set aoc_url "https://adventofcode.com/2024/"
