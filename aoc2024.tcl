@@ -24,6 +24,7 @@ set menu {
     "Day 18: RAM Run"
     "Day 19: Linen Layout"
     "Day 20: Race Condition"
+    "Day 22: Monkey Market"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
