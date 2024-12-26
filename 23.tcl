@@ -1,6 +1,4 @@
 #!/usr/bin/env tclsh
-package require Tcl 8.0
-package require struct::set 2.2.3
 proc aoc_23 { } {
     
     set result [list]
@@ -17,14 +15,43 @@ proc aoc_23 { } {
         lappend result $count
     }
     # Part2
-    # TODO
-    
+    if {1} {
+        lappend result [password [biggest_lan]]
+    }
     
     return $result
 }
 # --------------------------------------------------------------------
 proc password { lan } {
     return [join [lsort -unique $lan] ","]
+}
+proc biggest_lan { } {
+    global nets
+    set biggest {}
+    foreach {name net} [array get nets] {
+        set lan [lan {*}$net]
+        if {[llength $biggest] < [llength $lan]} {
+            set biggest $lan
+        }
+    }
+    return $biggest
+}
+proc lan { {pc {}} args } {
+    global connected
+    if {$pc eq {}} {
+        return {}
+    }
+    set is_connected 1
+    foreach arg $args {
+        if {![info exists connected($pc-$arg)]} {
+            set is_connected 0
+        }
+    }
+    if {$is_connected} {
+        return [list $pc {*}[lan {*}$args]]
+    } else {
+        return [lan {*}$args]
+    }
 }
 # --------------------------------------------------------------------
 proc friends { set1 set2 } {
@@ -81,7 +108,7 @@ proc parse { data } {
 # --------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
     source "rd.tcl"
-    # Example results: 7
-    # My results: 1437
+    # Example results: 7 co,de,ka,ta
+    # My results: 1437 da,do,gx,ly,mb,ns,nt,pz,sc,si,tp,ul,vl
     puts [aoc_23]
 }
