@@ -35,6 +35,7 @@ Full List:
 - Day 21: Keypad Conundrum: [21.tcl](./21.tcl), [enunciation](https://adventofcode.com/2024/day/21).
 - Day 22: Monkey Market: [22.tcl](./22.tcl), [enunciation](https://adventofcode.com/2024/day/22).
 - Day 23: LAN Party: [23.tcl](./23.tcl), [enunciation](https://adventofcode.com/2024/day/23).
+- Day 24: Crossed Wires (p1): [24.tcl](./24.tcl), [enunciation](https://adventofcode.com/2024/day/24).
 
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
