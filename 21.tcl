@@ -37,35 +37,35 @@ proc aoc_21 { } {
 proc chain_instructions { name keys } {
     global KEYS DIRS
     interp recursionlimit {} 100000
-    return [best_instructions \
-                {*}[instructions $DIRS $name.p \
-                {*}[instructions $DIRS $name.1 \
-                {*}[instructions $DIRS $name.2 \
-                {*}[instructions $DIRS $name.3 \
-                {*}[instructions $DIRS $name.4 \
-                {*}[instructions $DIRS $name.5 \
-                {*}[instructions $DIRS $name.6 \
-                {*}[instructions $DIRS $name.7 \
-                {*}[instructions $DIRS $name.8 \
-                {*}[instructions $DIRS $name.9 \
-                {*}[instructions $DIRS $name.10 \
-                {*}[instructions $DIRS $name.11 \
-                {*}[instructions $DIRS $name.12 \
-                {*}[instructions $DIRS $name.13 \
-                {*}[instructions $DIRS $name.14 \
-                {*}[instructions $DIRS $name.15 \
-                {*}[instructions $DIRS $name.16 \
-                {*}[instructions $DIRS $name.17 \
-                {*}[instructions $DIRS $name.18 \
-                {*}[instructions $DIRS $name.19 \
-                {*}[instructions $DIRS $name.20 \
-                {*}[instructions $DIRS $name.21 \
-                {*}[instructions $DIRS $name.22 \
-                {*}[instructions $DIRS $name.23 \
-                {*}[instructions $DIRS $name.24 \
-                {*}[instructions $DIRS $name.25 \
-                {*}[instructions $KEYS $name.k $keys]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    return [instructions dirs $name.p \
+           [instructions dirs $name.1 \
+           [instructions dirs $name.2 \
+           [instructions dirs $name.3 \
+           [instructions dirs $name.4 \
+           [instructions dirs $name.5 \
+           [instructions dirs $name.6 \
+           [instructions dirs $name.7 \
+           [instructions dirs $name.8 \
+           [instructions dirs $name.9 \
+           [instructions dirs $name.10 \
+           [instructions dirs $name.11 \
+           [instructions dirs $name.12 \
+           [instructions dirs $name.13 \
+           [instructions dirs $name.14 \
+           [instructions dirs $name.15 \
+           [instructions dirs $name.16 \
+           [instructions dirs $name.17 \
+           [instructions dirs $name.18 \
+           [instructions dirs $name.19 \
+           [instructions dirs $name.20 \
+           [instructions dirs $name.21 \
+           [instructions dirs $name.22 \
+           [instructions dirs $name.23 \
+           [instructions dirs $name.24 \
+           [instructions dirs $name.25 \
+           [instructions keys $name.k $keys]]]]]]]]]]]]]]]]]]]]]]]]]]]
 }
+
 
 # --------------------------------------------------------------------
 
@@ -77,52 +77,26 @@ proc complexity { local remote } {
 
 proc person_instructions { name keys } {
     global KEYS DIRS
-    return [best_instructions \
-                 {*}[instructions $DIRS $name.1 \
-                 {*}[instructions $DIRS $name.2 \
-                 {*}[instructions $KEYS $name.3 $keys]]]]
+    return [instructions dirs $name.1 \
+                [instructions dirs $name.2 \
+                [instructions keys $name.3 $keys]]]
 }
-
-proc best_instructions { args } {
-    set sel {}
-    set selsz 10000000
-    foreach keys $args {
-        set keysz [string length $keys]
-        if {$keysz < $selsz} {
-            set sel $keys
-            set selsz $keysz
-        }
+proc instructions { keyboard name keys } {
+    global KEYS DIRS POS CACHE
+    switch $keyboard {
+        "keys"  { set map $KEYS }
+        "dirs"  { set map $DIRS }
+        default { set map $keyboard }
     }
-    return $sel
-}
-
-proc instructions { keyboard name args } {
-    global KEYS POS
-    set results {}
-    foreach keys $args {
-        set res {""}
-        if {![info exists POS($name)]} {
-            set POS($name) "A"
-        }
-        foreach key [split $keys ""] {
-            set res [type_map $keyboard $POS($name) $key $res "A"]
-            set POS($name) $key
-        }
-        lappend results {*}$res
+    set pos "A"
+    set res ""
+    foreach key [split $keys ""] {
+        set res $res[dict get $map [list $pos $key]]A
+        set pos $key
     }
-    return [lrange $results 0 5000]
+    #puts "$name: [string length $res]"
+    return $res
 }
-
-proc type_map { map fr to {pres {""}} {last "A"} } {
-    set results [list]
-    foreach pre $pres {
-        foreach opt [dict get $map [list $fr $to]] {
-            lappend results $pre$opt$last
-        }
-    }
-    return $results
-}
-
 proc create_map { keyboard } {
     for {set y 0} {$y < [llength $keyboard]} {incr y} {
         for {set x 0} {$x < [llength [lindex $keyboard $y]]} {incr x} {
@@ -173,12 +147,36 @@ proc create_map { keyboard } {
             lappend moves($fr_to_key) $strokes
         }
     }
-
+    foreach {fr_to_key strokes} [array get moves] {
+        set moves($fr_to_key) [select_stroke {*}$strokes]
+    }
     return [array get moves]
 }
-
+proc select_stroke { {stroke1 {}} {stroke2 {}} } {
+    if {[stroke_points $stroke1] > [stroke_points $stroke2]} {
+        return $stroke1
+    } else {
+        return $stroke2
+    }
+}
+proc stroke_points { stroke } {
+    if {$stroke eq {}} {
+        return 0
+    }
+    if {[string index $stroke end] eq "^"} {
+        return 10
+    }
+    if {[string index $stroke end] eq ">"} {
+        return 5
+    }
+    if {[string index $stroke end] eq "v"} {
+        return 3
+    }
+    if {[string index $stroke end] eq "<"} {
+        return 1
+    }
+}
 # --------------------------------------------------------------------
-
 set KEYS_L {
     {7 8 9}
     {4 5 6}
