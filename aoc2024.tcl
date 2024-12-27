@@ -28,6 +28,7 @@ set menu {
     "Day 22: Monkey Market"
     "Day 23: LAN Party"
     "Day 24: Crossed Wires"
+    "Day 25: Code Chronicle"
 }
 set aoc_url "https://adventofcode.com/2024/"
 set git_repo "https://github.com/harkaitz/advent-of-code-2024-tcl"
