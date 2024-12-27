@@ -36,42 +36,35 @@ proc aoc_21 { } {
 
 proc chain_instructions { name keys } {
     global KEYS DIRS
-    global KEYS DIRS
-    set ret ""
     interp recursionlimit {} 100000
-    foreach remote_key $keys {
-        set local_keys \
-            [best_instructions \
-                 {*}[instructions $DIRS $name.p \
-                 {*}[instructions $DIRS $name.1 \
-                 {*}[instructions $DIRS $name.2 \
-                 {*}[instructions $DIRS $name.3 \
-                 {*}[instructions $DIRS $name.4 \
-                 {*}[instructions $DIRS $name.5 \
-                 {*}[instructions $DIRS $name.6 \
-                 {*}[instructions $DIRS $name.7 \
-                 {*}[instructions $DIRS $name.8 \
-                 {*}[instructions $DIRS $name.9 \
-                 {*}[instructions $DIRS $name.10 \
-                 {*}[instructions $DIRS $name.11 \
-                 {*}[instructions $DIRS $name.12 \
-                 {*}[instructions $DIRS $name.13 \
-                 {*}[instructions $DIRS $name.14 \
-                 {*}[instructions $DIRS $name.15 \
-                 {*}[instructions $DIRS $name.16 \
-                 {*}[instructions $DIRS $name.17 \
-                 {*}[instructions $DIRS $name.18 \
-                 {*}[instructions $DIRS $name.19 \
-                 {*}[instructions $DIRS $name.20 \
-                 {*}[instructions $DIRS $name.21 \
-                 {*}[instructions $DIRS $name.22 \
-                 {*}[instructions $DIRS $name.23 \
-                 {*}[instructions $DIRS $name.24 \
-                 {*}[instructions $DIRS $name.25 \
-                 {*}[instructions $KEYS $name.k $remote_key]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-        set ret $ret$local_keys
-    }
-    return $ret
+    return [best_instructions \
+                {*}[instructions $DIRS $name.p \
+                {*}[instructions $DIRS $name.1 \
+                {*}[instructions $DIRS $name.2 \
+                {*}[instructions $DIRS $name.3 \
+                {*}[instructions $DIRS $name.4 \
+                {*}[instructions $DIRS $name.5 \
+                {*}[instructions $DIRS $name.6 \
+                {*}[instructions $DIRS $name.7 \
+                {*}[instructions $DIRS $name.8 \
+                {*}[instructions $DIRS $name.9 \
+                {*}[instructions $DIRS $name.10 \
+                {*}[instructions $DIRS $name.11 \
+                {*}[instructions $DIRS $name.12 \
+                {*}[instructions $DIRS $name.13 \
+                {*}[instructions $DIRS $name.14 \
+                {*}[instructions $DIRS $name.15 \
+                {*}[instructions $DIRS $name.16 \
+                {*}[instructions $DIRS $name.17 \
+                {*}[instructions $DIRS $name.18 \
+                {*}[instructions $DIRS $name.19 \
+                {*}[instructions $DIRS $name.20 \
+                {*}[instructions $DIRS $name.21 \
+                {*}[instructions $DIRS $name.22 \
+                {*}[instructions $DIRS $name.23 \
+                {*}[instructions $DIRS $name.24 \
+                {*}[instructions $DIRS $name.25 \
+                {*}[instructions $KEYS $name.k $keys]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 }
 
 # --------------------------------------------------------------------
@@ -84,16 +77,10 @@ proc complexity { local remote } {
 
 proc person_instructions { name keys } {
     global KEYS DIRS
-    set ret ""
-    foreach remote_key $keys {
-        set local_keys \
-            [best_instructions \
+    return [best_instructions \
                  {*}[instructions $DIRS $name.1 \
-                         {*}[instructions $DIRS $name.2 \
-                                 {*}[instructions $KEYS $name.3 $remote_key]]]]
-        set ret $ret$local_keys
-    }
-    return $ret
+                 {*}[instructions $DIRS $name.2 \
+                 {*}[instructions $KEYS $name.3 $keys]]]]
 }
 
 proc best_instructions { args } {
