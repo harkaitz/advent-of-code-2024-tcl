@@ -1,30 +1,30 @@
 #!/usr/bin/env tclsh
+# This was hard, the key is in "select_stroke" and caching the count.
 proc aoc_21 { } {
-    global KEYS DIRS
     
     set result [list]
     set data [aoc_read "21.data"]
     set remotes [split $data "\n"]
-    set count 0
-
+    
     # Part 1
     if {1} {
+        set count 0
         foreach remote $remotes {
-            set local [person_instructions a $remote]
-            set points [complexity $local $remote]
+            set points [part1 $remote]
             incr count $points
-            puts "$remote: $local ($points)"
+            puts "$remote: ($points)"
         }
         lappend result $count
     }
+    
         
     # Part 2
-    if {0} {
+    if {1} {
+        set count 0
         foreach remote $remotes {
-            set local [chain_instructions b $remote]
-            set points [complexity $local $remote]
+            set points [part2 $remote]
             incr count $points
-            puts "$remote: $local ($points)"
+            puts "$remote: ($points)"
         }
         lappend result $count
     }
@@ -33,53 +33,66 @@ proc aoc_21 { } {
 }
 
 # --------------------------------------------------------------------
-
-proc chain_instructions { name keys } {
-    global KEYS DIRS
-    interp recursionlimit {} 100000
-    return [instructions dirs $name.p \
-           [instructions dirs $name.1 \
-           [instructions dirs $name.2 \
-           [instructions dirs $name.3 \
-           [instructions dirs $name.4 \
-           [instructions dirs $name.5 \
-           [instructions dirs $name.6 \
-           [instructions dirs $name.7 \
-           [instructions dirs $name.8 \
-           [instructions dirs $name.9 \
-           [instructions dirs $name.10 \
-           [instructions dirs $name.11 \
-           [instructions dirs $name.12 \
-           [instructions dirs $name.13 \
-           [instructions dirs $name.14 \
-           [instructions dirs $name.15 \
-           [instructions dirs $name.16 \
-           [instructions dirs $name.17 \
-           [instructions dirs $name.18 \
-           [instructions dirs $name.19 \
-           [instructions dirs $name.20 \
-           [instructions dirs $name.21 \
-           [instructions dirs $name.22 \
-           [instructions dirs $name.23 \
-           [instructions dirs $name.24 \
-           [instructions dirs $name.25 \
-           [instructions keys $name.k $keys]]]]]]]]]]]]]]]]]]]]]]]]]]]
+proc part1 { keys } {
+    set num1 [instructions_dirs_count p1.a 2 [instructions keys p1.b $keys]]
+    set num2 [string trimright [string trimleft $keys "0"] "A"]
+    return [expr {$num1 * $num2}]
 }
-
-
+proc part2 { keys } {
+    set num1 [instructions_dirs_count p2.C 25 [instructions keys p2.K $keys]]
+    set num2 [string trimright [string trimleft $keys "0"] "A"]
+    return [expr {$num1 * $num2}]
+}
+proc instructions_dirs_count { name num keys } {
+    global CACHE POS
+    unset -nocomplain CACHE POS
+    return [instructions_dirs_count_key $name $keys $num]
+}
+proc instructions_dirs_count_key { name keys num } {
+    global CACHE POS
+    set count 0
+    set iname $name.l.$num
+    if {$num > 1} {
+        foreach key [splitA [instructions dirs $iname $keys]] {
+            if {[info exists CACHE($iname.$key)]} {
+                set number $CACHE($iname.$key)
+            } else {
+                set number [instructions_dirs_count_key $name $key [expr {$num - 1}]]
+                set CACHE($iname.$key) $number
+            }
+            incr count $number
+        }
+    } else {
+        incr count [string length [instructions dirs $iname $keys]]
+    }
+    return $count
+}
+proc splitA { txt } {
+    set lst {}
+    set str ""
+    foreach t [split $txt ""] {
+        if {$t eq "A"} {
+            lappend lst $str$t
+            set str ""
+        } else {
+            set str $str$t
+        }
+    }
+    if {$str ne ""} {
+        lappend lst $str
+    }
+    return $lst
+}
 # --------------------------------------------------------------------
-
 proc complexity { local remote } {
     set num1 [string length $local]
     set num2 [string trimright [string trimleft $remote "0"] "A"]
     return [expr {$num1 * $num2}]
 }
-
 proc person_instructions { name keys } {
-    global KEYS DIRS
     return [instructions dirs $name.1 \
-                [instructions dirs $name.2 \
-                [instructions keys $name.3 $keys]]]
+           [instructions dirs $name.2 \
+           [instructions keys $name.3 $keys]]]
 }
 proc instructions { keyboard name keys } {
     global KEYS DIRS POS CACHE
@@ -88,13 +101,17 @@ proc instructions { keyboard name keys } {
         "dirs"  { set map $DIRS }
         default { set map $keyboard }
     }
-    set pos "A"
+    if {[info exists POS($name)]} {
+        set pos $POS($name)
+    } else {
+        set pos "A"
+    }
     set res ""
     foreach key [split $keys ""] {
         set res $res[dict get $map [list $pos $key]]A
         set pos $key
     }
-    #puts "$name: [string length $res]"
+    set POS($name) $pos
     return $res
 }
 proc create_map { keyboard } {
@@ -164,10 +181,10 @@ proc stroke_points { stroke } {
         return 0
     }
     if {[string index $stroke end] eq "^"} {
-        return 10
+        return 5
     }
     if {[string index $stroke end] eq ">"} {
-        return 5
+        return 10
     }
     if {[string index $stroke end] eq "v"} {
         return 3
@@ -189,11 +206,10 @@ set DIRS_L {
 }
 set KEYS [create_map $KEYS_L]
 set DIRS [create_map $DIRS_L]
-
 # --------------------------------------------------------------------
 if {[file tail $argv0] eq [file tail [info script]]} {
     source "rd.tcl"
-    # Example results: 126384
-    # My results: 215374
+    # Example results: 126384 154115708116294
+    # My results: 215374 260586897262600
     puts [aoc_21]
 }

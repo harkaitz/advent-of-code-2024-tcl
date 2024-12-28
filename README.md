@@ -32,7 +32,7 @@ Full List:
 - Day 18: RAM Run: [18.tcl](./18.tcl), [enunciation](https://adventofcode.com/2024/day/18).
 - Day 19: Linen Layout: [19.tcl](./19.tcl), [enunciation](https://adventofcode.com/2024/day/19).
 - Day 20: Race Condition: [20.tcl](./20.tcl), [enunciation](https://adventofcode.com/2024/day/20).
-- Day 21: Keypad Conundrum (p1): [21.tcl](./21.tcl), [enunciation](https://adventofcode.com/2024/day/21).
+- Day 21: Keypad Conundrum: [21.tcl](./21.tcl), [enunciation](https://adventofcode.com/2024/day/21).
 - Day 22: Monkey Market: [22.tcl](./22.tcl), [enunciation](https://adventofcode.com/2024/day/22).
 - Day 23: LAN Party: [23.tcl](./23.tcl), [enunciation](https://adventofcode.com/2024/day/23).
 - Day 24: Crossed Wires (p1): [24.tcl](./24.tcl), [enunciation](https://adventofcode.com/2024/day/24).
