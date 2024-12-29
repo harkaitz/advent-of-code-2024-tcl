@@ -41,6 +41,12 @@ Full List:
 Install tcl `sudo apt-get -y install tcl tk` and then run with `tclsh ./01.tcl`. You
 can also run the [gui](./aoc2024.tcl) with `wish ./aoc2024.tcl` 😉.
 
+## Final thoughts
+
+We did it!! 2024-12-29 12:00, 12839 people have finished the AOC today
+out of 238557 that have started it. I would like my solutions to work
+with all inputs, if you find an errata please send me a pull request.
+
 ## Screenshots:
 
 <img src="gui.png" title="advent_gui">
