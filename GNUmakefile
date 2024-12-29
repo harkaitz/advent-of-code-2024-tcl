@@ -3,7 +3,7 @@
 .PHONY: all clean install check
 
 PROJECT   =advent-of-code-2024-tcl
-VERSION   =23
+VERSION   =25
 PREFIX    =/usr/local
 BUILDDIR ?=.build
 EXE      ?=$(shell uname -s | awk '/Windows/ || /MSYS/ || /CYG/ { print ".exe" }')
