@@ -29,10 +29,10 @@ proc part2 { } {
             if {$nout eq {}} {
                 set g1 [lindex [lindex [gate_view $out] 1] end]
                 set c1 [gate_search {^C-XOR [xy]$n [xy]$n [^ ]+} $n]
-                puts "a $g1 <-> $c1"
+                puts stderr "a $g1 <-> $c1"
                 lappend tofix $g1 $c1
             } else {
-                puts "b $out <-> $nout : [gate_view $nout]"
+                puts stderr "b $out <-> $nout : [gate_view $nout]"
                 lappend tofix $out $nout
             }
         }

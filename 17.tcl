@@ -12,7 +12,7 @@ proc aoc_17 { } {
 
     ## Part 1
     set program [compile {*}$prg_ra_rb_rc]
-    puts $program
+    puts stderr $program
     eval $program
     lappend result [join $OUT ","]
 
@@ -76,7 +76,7 @@ proc compile { assembly {RA 0} {RB 0} {RC 0} } {
 }
 proc compile_it { assembly } {
     set code ""
-    set vcode {puts [format "(A=%i:%o)(B=%i:%o)(C=%i:%o)(%s)\n" $RA $RA $RB $RB $RC $RC $OUT]}
+    set vcode {puts stderr [format "(A=%i:%o)(B=%i:%o)(C=%i:%o)(%s)\n" $RA $RA $RB $RB $RC $RC $OUT]}
     foreach {opcode operand} $assembly {
         switch $opcode {
             adv - 0 { set ncode "set RA \[expr {entier(\$RA >> [combo $operand])} \]" }
@@ -91,7 +91,7 @@ proc compile_it { assembly } {
         set code "${code}    ${ncode}; # ${opcode} ${operand}\n"
         switch x$opcode {
             out - 4 {
-                set code "${code}    puts {$ncode}\n"
+                set code "${code}    puts stderr {$ncode}\n"
                 set code "${code}    ${vcode}\n"
             }
         }

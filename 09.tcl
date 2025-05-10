@@ -17,7 +17,7 @@ proc defrag1 { } {
     global data space disksz
     set fl [lsort -real [array names space]]
     set dl [lreverse [lsort -real [array names data]]]
-    puts "Defragmenting 1"
+    puts stderr "Defragmenting 1"
     foreach d $dl f $fl {
         if {$d eq "" || $f eq "" || $d < $f} {
             return
@@ -33,7 +33,7 @@ proc defrag2 { } {
     global data disksz
     set sp_pos 0
     set da_pos [expr $disksz - 1]
-    puts "Defragmenting 2"
+    puts stderr "Defragmenting 2"
     while {1} {
         set da [get_data_2 $da_pos 0]
         set sp [get_space_2 $sp_pos $da_pos [len_block $da]]
@@ -45,15 +45,15 @@ proc defrag2 { } {
             break
         }
         if {![llength $sp]} {
-            puts -nonewline "."
+            puts -nonewline stderr "."
             flush stdout
             continue
         }
-        puts -nonewline "+"
+        puts -nonewline stderr "+"
         flush stdout
         move_block $sp $da
     }
-    puts ""
+    puts stderr ""
 }
 proc get_space_2 { start {pmax -1} {bmin 1} } {
     global data space disksz
@@ -176,12 +176,12 @@ proc print { } {
     global data
     foreach p [get_blocks] {
         if {[info exists data($p)]} {
-            puts -nonewline $data($p)
+            puts -nonewline stderr $data($p)
         } else {
-            puts -nonewline "."
+            puts -nonewline stderr "."
         }
     }
-    puts ""
+    puts stderr ""
 }
 proc checksum { } {
     global data

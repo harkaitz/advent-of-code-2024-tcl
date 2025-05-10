@@ -109,17 +109,17 @@ proc show { } {
     for {set y 0} {$y < $map_y} {incr y} {
         for {set x 0} {$x < $map_x} {incr x} {
             if {[quadrant $x $y] eq ""} {
-                puts -nonewline " "
+                puts -nonewline stderr " "
                 continue
             }
             set p [list $x $y]
             if {[info exists map($p)]} {
-                puts -nonewline [llength $map($p)]
+                puts -nonewline stderr [llength $map($p)]
             } else {
-                puts -nonewline "."
+                puts -nonewline stderr "."
             }
         }
-        puts ""
+        puts stderr ""
     }
 }
 proc quadrant { x y } {

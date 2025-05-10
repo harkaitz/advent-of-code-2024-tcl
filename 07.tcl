@@ -6,12 +6,12 @@ proc aoc_07 { } {
     foreach res_nums [lmap l [split $d1 "\n"] { split $l ":" } ] {
         set res [lindex $res_nums 0]
         set nums [lindex $res_nums 1]
-        puts -nonewline "."
+        puts -nonewline stderr "."
         flush stdout
         incr count1 [recursive_search $res {"+" "*"} {*}$nums]
         incr count2 [recursive_search $res {"+" "*" "||"} {*}$nums]
     }
-    puts ""
+    puts stderr ""
     return [list $count1 $count2]
 }
 proc recursive_search { num ops a b args } {

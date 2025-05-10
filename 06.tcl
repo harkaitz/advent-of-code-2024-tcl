@@ -17,14 +17,14 @@ proc aoc_06 { } {
         aoc_load_map
         lset map $lock "O"
         if { [aoc_play] == 2 } {
-            puts -nonewline "+"
+            puts -nonewline stderr "+"
             incr count
         } else {
-            puts -nonewline "."
+            puts -nonewline stderr "."
         }
         flush stdout
     }
-    puts ""
+    puts stderr ""
     lappend res $count
     return $res
 }
@@ -80,12 +80,12 @@ proc aoc_show_map { } {
     for {set y 0} {$y < [llength $map]} {incr y} {
         for {set x 0} {$x < [llength [lindex $map $y]]} {incr x} {
             if {$y == $pos_y && $x == $pos_x} {
-                puts -nonewline $state
+                puts -nonewline stderr $state
             } else {
-                puts -nonewline [lindex $map $y $x]
+                puts -nonewline stderr [lindex $map $y $x]
             }
         }
-        puts ""
+        puts stderr ""
     }
 }
 proc aoc_move_map { } {

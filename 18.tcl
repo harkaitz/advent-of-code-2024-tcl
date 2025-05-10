@@ -9,7 +9,7 @@ proc aoc_18 { } {
 
     # Part 1
     set roads [search {{0 0}} $bytes]
-    puts "Roads: [llength $roads]"
+    puts stderr "Roads: [llength $roads]"
     set a_road [lindex $roads 0]
     #draw $bytes $a_road
     lappend result [best_road_size $roads]
@@ -33,7 +33,7 @@ proc monitor_road { road start } {
                 #draw $secs
                 return [lindex $road $blockage]
             }
-            puts "Found a new way ..."
+            puts stderr "Found a new way ..."
             set road [lindex $new_roads 0]
         }
     }
@@ -131,12 +131,12 @@ proc valid_trail { secs trail } {
 }
 proc draw { secs {way {}} } {
     global map_x map_y
-    puts "="
+    puts stderr "="
     for {set y 0} {$y < $map_y} {incr y} {
         for {set x 0} {$x < $map_x} {incr x} {
-            puts -nonewline [lindex [map_get $secs [pos $x $y] $way] 0]
+            puts -nonewline stderr [lindex [map_get $secs [pos $x $y] $way] 0]
         }
-        puts ""
+        puts stderr ""
     }
 }
 proc map_get { secs pos {way {}} } {

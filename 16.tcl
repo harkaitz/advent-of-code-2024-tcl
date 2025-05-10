@@ -42,11 +42,11 @@ proc search { {pos "start"} {steps {}} {cval 0}} {
         
         if {[map_get $choice] eq "E"} {
             if {$val < $best_value} {
-                puts "Found $val"
+                puts stderr "Found $val"
                 set best_value $val
                 set best_steps [list [list {*}$steps [xy $choice]]]
             } elseif {$val == $best_value} {
-                puts "Found $val"
+                puts stderr "Found $val"
                 lappend best_steps [list {*}$steps [xy $choice]]
             }
             continue
@@ -104,18 +104,18 @@ proc ways { pos cval } {
 # --------------------------------------------------------------------
 proc draw { {ways {}} } {
     global map max
-    puts ""
-    puts "=========================================================="
-    puts ""
+    puts stderr ""
+    puts stderr "=========================================================="
+    puts stderr ""
     for {set y 0} {$y < [y $max]} {incr y} {
         for {set x 0} {$x < [x $max]} {incr x} {
             if {[lsearch $ways [pos $x $y]] != -1} {
-                puts -nonewline "x"
+                puts -nonewline stderr "x"
             } else {
-                puts -nonewline [map_get [pos $x $y]]
+                puts -nonewline stderr [map_get [pos $x $y]]
             }
         }
-        puts ""
+        puts stderr ""
     }
     gets stdin
 }

@@ -12,7 +12,7 @@ proc aoc_21 { } {
         foreach remote $remotes {
             set points [part1 $remote]
             incr count $points
-            puts "$remote: ($points)"
+            puts stderr "$remote: ($points)"
         }
         lappend result $count
     }
@@ -24,7 +24,7 @@ proc aoc_21 { } {
         foreach remote $remotes {
             set points [part2 $remote]
             incr count $points
-            puts "$remote: ($points)"
+            puts stderr "$remote: ($points)"
         }
         lappend result $count
     }
